@@ -887,6 +887,15 @@ public class ThriftAdmin implements Admin {
   public void split(TableName tableName, byte[] splitPoint) {
     throw new NotImplementedException("split not supported in ThriftAdmin");
   }
+  @Override
+  public void truncateRegion(byte[] regionName) throws IOException {
+    throw new NotImplementedException("Truncate Region not supported in ThriftAdmin");
+  }
+
+  @Override
+  public Future<Void> truncateRegionAsync(byte[] regionName) {
+    throw new NotImplementedException("Truncate Region Async not supported in ThriftAdmin");
+  }
 
   @Override
   public void splitRegion(byte[] regionName, byte[] splitPoint) {

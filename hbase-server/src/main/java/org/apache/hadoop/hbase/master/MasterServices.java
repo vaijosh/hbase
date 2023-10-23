@@ -433,4 +433,13 @@ public interface MasterServices extends Server {
    * Flush master local region
    */
   void flushMasterStore() throws IOException;
+
+  /**
+   * Truncate region
+   * @param regionInfo region to be truncated
+   * @param nonceGroup the nonce group
+   * @param nonce      the nonce
+   * @return procedure Id
+   */
+  long truncateRegion(RegionInfo regionInfo, long nonceGroup, long nonce) throws IOException;
 }
