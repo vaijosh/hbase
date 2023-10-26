@@ -301,7 +301,7 @@ public class TestAsyncRegionAdminApi2 extends TestAsyncAdminBase {
 
     AsyncTable<AdvancedScanResultConsumer> metaTable = ASYNC_CONN.getTable(META_TABLE_NAME);
     List<HRegionLocation> regionLocations =
-      ClientMetaTableAccessor.getTableHRegionLocations(metaTable, tableName).get();
+      AsyncMetaTableAccessor.getTableHRegionLocations(metaTable, tableName).get();
     RegionInfo regionToBeTruncated = regionLocations.get(0).getRegion();
 
     assertEquals(4, regionLocations.size());
@@ -335,7 +335,7 @@ public class TestAsyncRegionAdminApi2 extends TestAsyncAdminBase {
 
     AsyncTable<AdvancedScanResultConsumer> metaTable = ASYNC_CONN.getTable(META_TABLE_NAME);
     List<HRegionLocation> regionLocations =
-      ClientMetaTableAccessor.getTableHRegionLocations(metaTable, tableName).get();
+      AsyncMetaTableAccessor.getTableHRegionLocations(metaTable, tableName).get();
     RegionInfo primaryRegion = regionLocations.get(0).getRegion();
 
     RegionInfo firstReplica = RegionReplicaUtil.getRegionInfoForReplica(primaryRegion, 1);

@@ -33,6 +33,7 @@ import org.apache.hadoop.hbase.shaded.protobuf.generated.AccessControlProtos.Rev
 import org.apache.hadoop.hbase.shaded.protobuf.generated.ClientProtos.CoprocessorServiceRequest;
 import org.apache.hadoop.hbase.shaded.protobuf.generated.ClientProtos.CoprocessorServiceResponse;
 import org.apache.hadoop.hbase.shaded.protobuf.generated.HBaseProtos;
+import org.apache.hadoop.hbase.shaded.protobuf.generated.MasterProtos;
 import org.apache.hadoop.hbase.shaded.protobuf.generated.MasterProtos.AbortProcedureRequest;
 import org.apache.hadoop.hbase.shaded.protobuf.generated.MasterProtos.AbortProcedureResponse;
 import org.apache.hadoop.hbase.shaded.protobuf.generated.MasterProtos.AddColumnRequest;
@@ -715,6 +716,12 @@ public class ShortCircuitMasterConnection implements MasterKeepAliveConnection {
   public SplitTableRegionResponse splitRegion(RpcController controller,
     SplitTableRegionRequest request) throws ServiceException {
     return stub.splitRegion(controller, request);
+  }
+
+  @Override
+  public MasterProtos.TruncateRegionResponse truncateRegion(RpcController controller,
+    MasterProtos.TruncateRegionRequest request) throws ServiceException {
+    return stub.truncateRegion(controller, request);
   }
 
   @Override

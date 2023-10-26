@@ -472,6 +472,25 @@ public interface Admin extends Abortable, Closeable {
   Future<Void> truncateTableAsync(TableName tableName, boolean preserveSplits) throws IOException;
 
   /**
+   * Truncate an individual region.
+   * @param regionName region to truncate
+   * @throws IOException if a remote or network exception occurs
+   */
+  void truncateRegion(byte[] regionName) throws IOException;
+
+  /**
+   * Truncate an individual region. Asynchronous operation. You can use Future.get(long, TimeUnit)
+   * to wait on the operation to complete. It may throw ExecutionException if there was an error
+   * while executing the operation or TimeoutException in case the wait timeout was not long enough
+   * to allow the operation to complete.
+   * @param regionName region to truncate
+   * @throws IOException if a remote or network exception occurs
+   * @return the result of the async truncate. You can use Future.get(long, TimeUnit) to wait on the
+   *         operation to complete.
+   */
+  Future<Void> truncateRegionAsync(byte[] regionName) throws IOException;
+
+  /**
    * Enable a table. May timeout. Use {@link #enableTableAsync(org.apache.hadoop.hbase.TableName)}
    * and {@link #isTableEnabled(org.apache.hadoop.hbase.TableName)} instead. The table has to be in
    * disabled state for it to be enabled.
@@ -1546,20 +1565,6 @@ public interface Admin extends Abortable, Closeable {
     }
     return modifyTableAsync(td);
   }
-
-  /**
-   * Truncate an individual region.
-   * @param regionName region to truncate
-   * @throws IOException if a remote or network exception occurs
-   */
-  void truncateRegion(byte[] regionName) throws IOException;
-
-  /**
-   * Truncate an individual region. Asynchronous operation.
-   * @param regionName region to truncate
-   * @throws IOException if a remote or network exception occurs
-   */
-  Future<Void> truncateRegionAsync(byte[] regionName) throws IOException;
 
   /**
    * Modify an existing table, more IRB (ruby) friendly version. Asynchronous operation. This means
